@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Fonts Import (Unchanged) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- SEO Core: Title Tag -->
+    <title>Arched Text Generator | Free Online Arc Text Tool</title>
+    
+    <!-- SEO Core: Description -->
+    <meta name="description" content="Use our free online Arched Text Generator to easily create custom curved, circular, or arc text. Real-time preview, adjust radius, export as 720x720 PNG/JPG images.">
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://www.yourdomain.com/arched-text-generator">
+    
+    <!-- Internal CSS Styles -->
+    <style>
+        /* 1. Global Resets and Basic Settings */
+        :root {
+            --color-primary: #1D4ED8;     
+            --color-accent: #059669;      
+            --color-main-bg: #F0F4F8;     
+            --color-background: #F9FAFC;  
+            --color-surface: #FFFFFF;     
+            --color-border: #E5E7EB;      
+            --color-text-dark: #1F2937;   
+            --color-text-light: #6B7280;  
+            --border-radius: 8px;         
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-main-bg); 
+            font-size: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem; 
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Header and Logo - FONT ADJUSTMENT */
+        .site-header {
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.25rem 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); 
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center;
+        }
+
+        .logo {
+            /* ADJUSTMENT: Slightly larger and bolder */
+            font-size: 2rem; 
+            font-weight: 900; /* Extra bold */
+            color: var(--color-primary);
+            text-decoration: none;
+            cursor: pointer; 
+            letter-spacing: -1px; /* Tighter spacing */
+        }
+        
+        .logo-symbol {
+            margin-right: 0.35rem;
+            font-size: 2.25rem; /* Corresponding symbol size increase */
+            line-height: 1; 
+            display: inline-block;
+            transform: translateY(1px); 
+            color: var(--color-accent); 
+        }
+
+
+        /* Core Tool Area Layout */
+        #main-tool {
+            padding: 3rem 0; 
+        }
+
+        .page-title {
+            /* ADJUSTMENT: Bolder and slightly larger text */
+            font-size: 2.25rem; 
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--color-text-dark);
+        }
+
+        .tool-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            background-color: var(--color-background);
+            border-radius: var(--border-radius);
+            padding: 2rem; 
+        }
+
+        .control-panel {
+            background-color: var(--color-surface);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08); 
+        }
+
+        /* Input Control Styles */
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 1rem; color: var(--color-text-dark); }
+        textarea, select, input[type="color"], .range-group input[type="number"] { 
+            width: 100%; 
+            padding: 0.75rem; 
+            border: 1px solid var(--color-border);
+            border-radius: 6px; 
+            font-size: 1rem; 
+            background-color: var(--color-surface);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        textarea:focus, select:focus, input[type="color"]:focus, .range-group input[type="number"]:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.2); 
+            outline: none;
+        }
+        textarea { resize: vertical; }
+
+        /* Slider Group Layout */
+        .range-group { 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center; 
+            gap: 0.5rem 0; 
+        }
+        .range-group label { 
+            flex: 1 1 100%; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        /* Layout: Slider, Number Input side-by-side */
+        .range-group input[type="range"] { 
+            flex-grow: 1; 
+            min-width: 60%; 
+            margin: 0;
+            padding: 0; 
+        }
+        
+        .range-group input[type="number"] { 
+            flex: 0 0 30%; 
+            max-width: 30%;
+            text-align: center; 
+            padding: 0.5rem 0.2rem;
+            font-size: 0.9rem; 
+            margin-left: 0.5rem; 
+            background-color: var(--color-background); 
+        }
+        
+        /* Hide number input arrows */
+        .range-group input[type=number]::-webkit-inner-spin-button, 
+        .range-group input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+
+
+        .preview-export-wrapper {
+            display: flex;
+            flex-direction: column; 
+            gap: 1.5rem; 
+            flex-grow: 1; 
+        }
+        
+        /* Preview Area is a white card on the lighter background */
+        .preview-area {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border); 
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08); 
+            min-height: 450px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            flex-grow: 1; 
+        }
+
+        #preview-canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        #curved-text-output {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .placeholder-text {
+            color: var(--color-text-light);
+            font-style: italic;
+            position: absolute;
+            font-size: 1.1rem;
+        }
+        
+        /* Button Styles */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.8rem 1.5rem; 
+            border: none;
+            border-radius: 6px; 
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.1s;
+            flex-grow: 1; 
+            font-size: 1rem;
+        }
+
+        .primary-button { 
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background-color: #047857; 
+        }
+
+        .secondary-button { 
+            background-color: var(--color-surface);
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .secondary-button:hover {
+            background-color: var(--color-background);
+        }
+        
+        /* SEO Content and Footer */
+        .content-section { 
+            padding: 4rem 0; 
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-border); 
+            margin-top: 2rem; 
+        }
+        .content-section h2 { 
+            font-size: 1.75rem; 
+            font-weight: 700;
+            margin-top: 2rem; 
+            margin-bottom: 1.25rem; 
+            color: var(--color-primary); 
+        }
+        .content-section h3 { 
+            font-size: 1.35rem; 
+            font-weight: 600;
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem; 
+        }
+        .content-section p, .content-section li {
+            color: var(--color-text-dark);
+        }
+        .content-section ol { margin-left: 1.5rem; padding-left: 0; }
+        
+        .site-footer { 
+            background-color: #374151; 
+            color: #D1D5DB; 
+            padding: 2.5rem 0; 
+            font-size: 0.9rem; 
+            text-align: center; 
+        }
+        .site-footer a { 
+            color: #9CA3AF; 
+            text-decoration: none;
+        }
+        .site-footer a:hover { 
+            color: white; 
+        }
+
+        /* Desktop Media Query */
+        @media (min-width: 768px) {
+            /* ADJUSTMENT: Larger H1 font */
+            .page-title { 
+                font-size: 3.5rem; 
+            }
+            
+            .tool-interface { 
+                flex-direction: row; 
+                padding: 3rem; 
+                gap: 5rem; 
+            }
+            
+            .control-panel { 
+                flex: 0 0 300px; 
+                max-width: 30%;
+            }
+            
+            .range-group input[type="range"] { 
+                flex: 1 1 60%; 
+            }
+            .range-group input[type="number"] { 
+                flex: 0 0 25%; 
+                max-width: 25%;
+            }
+
+            .preview-export-wrapper {
+                flex-direction: row; 
+                gap: 2rem;
+            }
+
+            .preview-area {
+                min-height: 600px; 
+                flex-grow: 1; 
+            }
+
+            .action-buttons {
+                align-self: flex-start; 
+                flex-direction: column; 
+                gap: 1rem;
+                flex: 0 0 150px; 
+                padding: 1rem 0;
+            }
+            
+            .action-buttons button {
+                flex-grow: 0; 
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header Area -->
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo" aria-label="Go to homepage: ArchedText.io Arched Text Generator">
+                <span class="logo-symbol">⌒</span>
+                ArchedText.io
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Main Content Area: The Core Tool - UPDATED H1 TEXT -->
+    <main id="main-tool">
+        <div class="container">
+            <h1 class="page-title">Free Arched Text Generator</h1>
+
+            <section class="tool-interface">
+                <!-- 1. Control Panel (Left Side) -->
+                <div class="control-panel" role="form" aria-labelledby="controls-heading">
+                    <h2 id="controls-heading" class="visually-hidden">Text Generator Control Settings</h2>
+                    
+                    <div class="input-group">
+                        <label for="text-input">Enter Your Text:</label>
+                        <textarea id="text-input" rows="3" placeholder="Enter the text to curve...">Online Arched Text Tool</textarea>
+                    </div>
+
+                    <!-- Radius -->
+                    <div class="input-group range-group">
+                        <label for="radius-input">Arc Radius (px):</label>
+                        <input type="range" id="radius-input" min="100" max="300" value="200">
+                        <input type="number" id="radius-number" min="100" max="300" value="200">
+                    </div>
+
+                    <!-- Rotation -->
+                    <div class="input-group range-group">
+                        <label for="rotation-input">Text Rotation (°):</label>
+                        <input type="range" id="rotation-input" min="0" max="360" value="0">
+                        <input type="number" id="rotation-number" min="0" max="360" value="0">
+                    </div>
+                    
+                    <!-- Font Size -->
+                    <div class="input-group range-group">
+                        <label for="font-size-input">Font Size (px):</label>
+                        <input type="range" id="font-size-input" min="16" max="120" value="48">
+                        <input type="number" id="font-size-number" min="16" max="120" value="48">
+                    </div>
+                    
+                    <!-- Letter Spacing -->
+                    <div class="input-group range-group">
+                        <label for="spacing-input">Letter Spacing (px):</label>
+                        <input type="range" id="spacing-input" min="-10" max="50" value="0">
+                        <input type="number" id="spacing-number" min="-10" max="50" value="0">
+                    </div>
+
+                    <!-- Font Family -->
+                    <div class="input-group">
+                        <label for="font-family-select">Select Font Family:</label>
+                        <select id="font-family-select">
+                            <!-- Custom Fonts -->
+                            <option value="Pacifico, cursive">Pacifico (Handwritten)</option>
+                            <option value="'Playfair Display', serif">Playfair Display (Elegant Serif)</option>
+                            <option value="'Roboto', sans-serif">Roboto (Modern Sans-serif)</option>
+                            <!-- Web Safe Fonts -->
+                            <option value="Arial, sans-serif">Arial (Sans-serif)</option>
+                            <option value="Verdana, sans-serif">Verdana</option>
+                            <option value="Tahoma, sans-serif">Tahoma</option>
+                            <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                            <option value="Georgia, serif">Georgia (Serif)</option>
+                            <option value="Times New Roman, serif">Times New Roman</option>
+                            <option value="serif">Default Serif</option>
+                            <option value="Courier New, monospace">Courier New (Monospace)</option>
+                        </select>
+                    </div>
+
+                    <!-- Text Color -->
+                    <div class="input-group">
+                        <label for="text-color">Text Color:</label>
+                        <input type="color" id="text-color" value="#1D4ED8">
+                    </div>
+                </div>
+
+                <!-- 2. Preview and Export Container (Right Side) -->
+                <div class="preview-export-wrapper">
+                    <!-- Preview Area -->
+                    <div class="preview-area" role="region" aria-label="Real-time arched text preview">
+                        <h2 class="visually-hidden">Arched Text Preview</h2>
+                        <div id="curved-text-output">
+                            <canvas id="preview-canvas" width="720" height="720"></canvas>
+                            <p class="placeholder-text">Your arched text will appear here...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Export Buttons -->
+                    <div class="action-buttons">
+                        <button id="export-png-button" class="primary-button">Export PNG (720px)</button>
+                        <button id="export-jpg-button" class="secondary-button">Export JPG (720px)</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 3. SEO Supporting Content Area -->
+    <section id="seo-content" class="content-section">
+        <div class="container">
+            <h2>Why Choose Our Online Arched Text Tool?</h2>
+            <p>We offer the simplest and most powerful **Arched Text Generator** online. Create perfectly arched or circular text in seconds without downloading any software. Ideal for logo design, social media graphics, or any project needing unique text effects.</p>
+
+            <h2 id="how-to-use">How to Use the Arched Text Generator</h2>
+            <ol>
+                <li>Enter your desired text into the text box on the left.</li>
+                <li>**Use the slider or the number input to precisely adjust** the arc radius, rotation, font size, and **letter spacing**.</li>
+                <li>Select your preferred font and color.</li>
+                <li>**Real-Time Preview:** The preview updates automatically with every adjustment. When satisfied, click the export buttons on the right to get your free 720x720 PNG or JPG file.</li>
+            </ol>
+            
+            <h3>Applications of Arched Text in Design</h3>
+            <p>Arched text adds a dynamic and professional touch to your design work. Whether you are creating a badge, a stamp-style logo, or any project needing unique text effects, our tool makes complex text path effects easy to achieve.</p>
+        </div>
+    </section>
+    
+    <!-- 4. Footer Area -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 ArchedText.io. All rights reserved. | 
+                <a href="/privacy-policy">Privacy Policy</a> | 
+                <a href="/terms">Terms of Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 5. Client-Side Script: Canvas 2D API for Curved Text -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+            const previewCanvas = document.getElementById('preview-canvas');
+            const ctx = previewCanvas.getContext('2d');
+            const placeholder = document.querySelector('.placeholder-text');
+            const canvasSize = 720; 
+            const center = canvasSize / 2;
+
+            let renderTimeout;
+
+            // Batch get elements
+            const controls = [
+                { range: document.getElementById('radius-input'), number: document.getElementById('radius-number') },
+                { range: document.getElementById('rotation-input'), number: document.getElementById('rotation-number') },
+                { range: document.getElementById('font-size-input'), number: document.getElementById('font-size-number') },
+                // Letter Spacing Control
+                { range: document.getElementById('spacing-input'), number: document.getElementById('spacing-number') }
+            ];
+            const otherInputs = [textInput, document.getElementById('font-family-select'), document.getElementById('text-color')];
+
+            // Core Canvas Text Rendering Logic
+            const renderCurvedText = () => {
+                clearTimeout(renderTimeout);
+
+                const text = textInput.value || "";
+                const radius = parseInt(controls[0].range.value); 
+                const rotation = parseInt(controls[1].range.value); 
+                const fontSize = parseInt(controls[2].range.value);
+                const letterSpacing = parseInt(controls[3].range.value); // Get spacing value
+                const fontFamily = otherInputs[1].value;
+                const textColor = otherInputs[2].value;
+                
+                // 1. Clear Canvas (makes background transparent for PNG)
+                ctx.clearRect(0, 0, canvasSize, canvasSize);
+
+                if (!text.trim()) {
+                    placeholder.style.display = 'block';
+                    return;
+                }
+                
+                placeholder.style.display = 'none'; 
+
+                // 2. Set Font Styles
+                ctx.font = `${fontSize}px ${fontFamily}`;
+                ctx.fillStyle = textColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom'; 
+
+                // --- Canvas Arc Text Calculation ---
+
+                // 3. Calculate Total Text Path Length
+                let totalTextPathLength = 0;
+                const charWidths = [];
+
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    const charWidth = ctx.measureText(char).width; 
+                    charWidths.push(charWidth);
+                    
+                    // Add char width, plus spacing if it's not the last character
+                    totalTextPathLength += charWidth;
+                    if (i < text.length - 1) {
+                        totalTextPathLength += letterSpacing;
+                    }
+                }
+                
+                // 4. Calculate Total Arc Angle
+                const totalAngle = totalTextPathLength / radius; 
+                
+                // 5. Set Initial Rotation Angle (in radians)
+                const startAngle = (270 * Math.PI / 180) - (totalAngle / 2) + (rotation * Math.PI / 180); 
+                
+                // 6. Loop and Draw Each Character
+                let currentAngle = startAngle;
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    const charWidth = charWidths[i]; 
+                    
+                    // --- Character Angle Calculation ---
+                    const segmentLength = charWidth;
+                    const halfSegmentLength = segmentLength / 2;
+
+                    // Move to the center angle of the current character's path segment
+                    currentAngle += halfSegmentLength / radius;
+                    
+                    // --- Geometric calculation: Polar (r, theta) to Cartesian (x, y) ---
+                    const x = center + radius * Math.cos(currentAngle);
+                    const y = center + radius * Math.sin(currentAngle);
+                    
+                    ctx.save(); 
+                    
+                    ctx.translate(x, y); 
+                    
+                    // Rotate Canvas context (to align character tangentially to the arc)
+                    const rotateAngle = currentAngle + Math.PI / 2; 
+                    ctx.rotate(rotateAngle);
+                    
+                    // Draw the character (centered on its new origin (0, 0))
+                    ctx.fillText(char, 0, 0);
+                    
+                    ctx.restore(); 
+                    
+                    // Move to the start angle of the next character's path segment
+                    currentAngle += halfSegmentLength / radius;
+
+                    // Add spacing for the next character, if it exists
+                    if (i < text.length - 1) {
+                        currentAngle += letterSpacing / radius;
+                    }
+                }
+            };
+            
+            // Delayed Render Function (for number and text inputs)
+            const delayedRender = () => {
+                clearTimeout(renderTimeout);
+                renderTimeout = setTimeout(renderCurvedText, 150); // 150ms delay
+            };
+
+            // Export Logic (PNG/JPG)
+            const exportImage = (format) => {
+                if (!textInput.value.trim()) {
+                    alert('Please enter text to generate a preview.');
+                    return;
+                }
+                
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = canvasSize;
+                exportCanvas.height = canvasSize;
+                const exportCtx = exportCanvas.getContext('2d');
+
+                if (format === 'image/jpeg') {
+                    exportCtx.fillStyle = 'white';
+                    exportCtx.fillRect(0, 0, canvasSize, canvasSize);
+                }
+                
+                exportCtx.drawImage(previewCanvas, 0, 0);
+
+                const mimeType = format;
+                const quality = format === 'image/jpeg' ? 0.9 : 1.0; 
+                const dataUrl = exportCanvas.toDataURL(mimeType, quality); 
+
+                const a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = `arched-text-${Date.now()}.${format.split('/')[1].replace('jpeg', 'jpg')}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+
+            // --- Event Binding Logic: Two-Way Data Binding ---
+            
+            controls.forEach(control => {
+                const { range, number } = control;
+                const min = parseInt(range.min);
+                const max = parseInt(range.max);
+
+                // A. Range Input -> Update Number Input + Render Immediately
+                range.addEventListener('input', () => {
+                    number.value = range.value;
+                    renderCurvedText();
+                });
+
+                // B. Number Input -> Update Range Input + Render Delayed
+                number.addEventListener('input', () => {
+                    let val = parseInt(number.value);
+                    
+                    // Constrain to min/max
+                    if (isNaN(val)) {
+                         val = min;
+                    } else {
+                         val = Math.max(min, Math.min(max, val));
+                    }
+                    
+                    // Update both values
+                    range.value = val;
+                    number.value = val; 
+                    
+                    delayedRender(); 
+                });
+                
+                // Initial load
+                number.value = range.value;
+            });
+
+            // Bind other inputs (Text, Color, Font Select)
+            otherInputs.forEach(element => {
+                element.addEventListener('input', delayedRender);
+                if (element.tagName === 'SELECT') {
+                    element.addEventListener('change', renderCurvedText); 
+                }
+            });
+
+            document.getElementById('export-png-button').addEventListener('click', () => exportImage('image/png'));
+            document.getElementById('export-jpg-button').addEventListener('click', () => exportImage('image/jpeg'));
+
+            // Initial render on page load
+            renderCurvedText();
+        });
+    </script>
+</body>
+</html>
